@@ -1,5 +1,5 @@
 {
-	"name": "neutrino-umd",
+	"name": "neutrino-preset-umd",
 	"version": "0.1.0",
 	"description": "Neutrino preset for UMD modules",
 	"main": "src/index.js",
