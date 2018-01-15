@@ -7,9 +7,9 @@
 	"license": "GPL-3.0",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/constgen/neutrino-umd.git"
+		"url": "https://github.com/constgen/neutrino-preset-umd.git"
 	},
-	"homepage": "https://github.com/constgen/neutrino-umd",
+	"homepage": "https://github.com/constgen/neutrino-preset-umd",
 	"keywords": [
 		"umd",
 		"neutrino",
