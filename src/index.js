@@ -23,7 +23,7 @@ module.exports = function(neutrino, opts = {}){
 			fs: 'fs',
 			path: 'path'
 		},
-		node: {
+		globals: {
 			__filename: true,
 			__dirname: true,
 			global: true,
@@ -74,7 +74,7 @@ module.exports = function(neutrino, opts = {}){
 			.end()
 		.externals(settings.externals)
 		.node
-			.merge(settings.node)
+			.merge(settings.globals)
 			.end()
 		.plugin('module-concat')
 			.use(optimize.ModuleConcatenationPlugin)
