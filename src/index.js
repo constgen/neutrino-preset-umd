@@ -3,7 +3,7 @@
 let path = require('path')
 let deepmerge = require('deepmerge')
 let { optimize } = require('webpack')
-let minify = require('@neutrinojs/minify')
+let minify = require('@neutrinojs/babel-minify')
 let clean = require('@neutrinojs/clean')
 let project = require(path.resolve(process.cwd(), './package.json'))
 
