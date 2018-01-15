@@ -7,25 +7,39 @@ let minify = require('@neutrinojs/babel-minify')
 let clean = require('@neutrinojs/clean')
 let project = require(path.resolve(process.cwd(), './package.json'))
 
-const MODULES = path.join(__dirname, 'node_modules')
-
 module.exports = function(neutrino, opts = {}){
+	const MODULES = path.join(__dirname, 'node_modules')
 	let { config, options } = neutrino
-	let use = neutrino.use.bind(neutrino)
 	let startCommand = (options.command === 'start')
 	let buildCommand = (options.command === 'build')
-
 	let settings = deepmerge({
 		name: project.name,
 		library: '',
 		output: path.join(options.root, 'dist'),
-		externals: {},
-		node: {}
+		externals: {
+			http: 'http',
+			https: 'https',
+			url: 'url',
+			fs: 'fs',
+			path: 'path'
+		},
+		node: {
+			__filename: true,
+			__dirname: true,
+			global: true,
+			process: false,
+			setImmediate: false,
+			Buffer: false
+		},
+		minify: true
 	}, opts)
 
-	// Object.keys(options.mains).forEach(key => config.entry(key).add(options.mains[key]))
+	function use(preset, settings){
+		return function(){
+			neutrino.use(preset, settings)
+		}
+	}
 
-	use(minify)
 	config
 		.target('web')
 		.context(options.root)
@@ -58,27 +72,12 @@ module.exports = function(neutrino, opts = {}){
 				.add(MODULES)
 				.end()
 			.end()
-		.externals({
-			http: 'http',
-			https: 'https',
-			url: 'url',
-			fs: 'fs',
-			path: 'path'
-		})
+		.externals(settings.externals)
 		.node
-			.merge({
-				__filename: true,
-				__dirname: true,
-				global: true,
-				process: false,
-				setImmediate: false,
-				Buffer: false
-			})
 			.merge(settings.node)
 			.end()
 		.plugin('module-concat')
 			.use(optimize.ModuleConcatenationPlugin)
-		.when(buildCommand || startCommand, function() {
-			use(clean, { paths: [settings.output] })
-		})
+		.when(buildCommand || startCommand, use(clean, { paths: [settings.output] }))
+		.when(settings.minify, use(minify))
 }
