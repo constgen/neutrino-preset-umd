@@ -103,4 +103,14 @@ module.exports = function(neutrino, opts = {}){
 			.use(optimize.ModuleConcatenationPlugin)
 		.when(buildCommand || startCommand, use(clean, { paths: [settings.output] }))
 		.when(settings.minify, use(minify))
+		.when(config.module.rules.has('lint') && settings.library, function() {
+			config.module.rule('lint')
+				.use('eslint')
+					.tap(function(options){
+						return deepmerge(options, {
+							globals: [settings.library],
+							envs: ['browser', 'commonjs']
+						})
+					})
+		})
 }
