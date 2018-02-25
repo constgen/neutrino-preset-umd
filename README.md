@@ -107,7 +107,7 @@ module.exports = {
   use: [
     ['neutrino-preset-umd', {
       // A file name of a bundle without an extension. By default "name" from the packaje.json is used.
-      name: '',
+      filename: '',
 
       // A name of a namespace in the global object. If empty all module properties are exposed to a global scope.
       library: '',
@@ -117,11 +117,34 @@ module.exports = {
 
       // Modules that shouldn't be bundled. They will be imported in a runtime.
       externals: {
+         assert: 'assert',
+         buffer: 'buffer',
+         child_process: 'child_process',
+         cluster: 'cluster',
+         crypto: 'crypto',
+         dgram: 'dgram',
+         dns: 'dns',
+         domain: 'domain',
+         events: 'events',
+         fs: 'fs',
          http: 'http',
          https: 'https',
+         net: 'net',
+         os: 'os',
+         path: 'path',
+         punycode: 'punycode',
+         querystring: 'querystring',
+         readline: 'readline',
+         repl: 'repl',
+         stream: 'stream',
+         string_decoder: 'string_decoder',
+         tls: 'tls',
+         tty: 'tty',
          url: 'url',
-         fs: 'fs',
-         path: 'path'
+         util: 'util',
+         v8: 'v8',
+         vm: 'vm',
+         zlib: 'zlib'
       },
 
       // NodeJS global variales

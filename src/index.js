@@ -13,15 +13,38 @@ module.exports = function(neutrino, opts = {}){
 	let startCommand = (options.command === 'start')
 	let buildCommand = (options.command === 'build')
 	let settings = deepmerge({
-		name: project.name,
+		filename: project.name,
 		library: '',
 		output: path.join(options.root, 'dist'),
-		externals: {
+		externals: { // require('repl')._builtinLibs
+			assert: 'assert',
+			buffer: 'buffer',
+			child_process: 'child_process',
+			cluster: 'cluster',
+			crypto: 'crypto',
+			dgram: 'dgram',
+			dns: 'dns',
+			domain: 'domain',
+			events: 'events',
+			fs: 'fs',
 			http: 'http',
 			https: 'https',
+			net: 'net',
+			os: 'os',
+			path: 'path',
+			punycode: 'punycode',
+			querystring: 'querystring',
+			readline: 'readline',
+			repl: 'repl',
+			stream: 'stream',
+			string_decoder: 'string_decoder',
+			tls: 'tls',
+			tty: 'tty',
 			url: 'url',
-			fs: 'fs',
-			path: 'path'
+			util: 'util',
+			v8: 'v8',
+			vm: 'vm',
+			zlib: 'zlib'
 		},
 		globals: {
 			__filename: true,
@@ -49,7 +72,7 @@ module.exports = function(neutrino, opts = {}){
 		.output
 			.path(settings.output)
 			.publicPath('./')
-			.filename(settings.name + '.js')
+			.filename(settings.filename + '.js')
 			.library(settings.library)
 			.libraryTarget('umd')
 			.chunkFilename('[name].js')

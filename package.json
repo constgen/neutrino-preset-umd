@@ -1,6 +1,6 @@
 {
 	"name": "neutrino-preset-umd",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "Neutrino preset for UMD modules",
 	"main": "src/index.js",
 	"author": "Constantine Genchevsky <const.gen@gmail.com>",
@@ -21,10 +21,9 @@
 		"lint": "eslint --ext .js src/"
 	},
 	"dependencies": {
-		"@neutrinojs/clean": "~8.0.18",
-		"@neutrinojs/babel-minify": "~8.0.18",
-		"deepmerge": "~2.0.1",
-		"webpack": "*"
+		"@neutrinojs/clean": "~8.1.1",
+		"@neutrinojs/babel-minify": "~8.1.1",
+		"deepmerge": "~2.0.1"
 	},
 	"devDependencies": {
 		"eslint": "^4.14.0",
@@ -34,7 +33,8 @@
 		"webpack-dev-server": "2.9.7"
 	},
 	"peerDependencies": {
-		"neutrino": "^8.0.0"
+		"neutrino": "^8.0.0",
+		"webpack": ">=3.0.0"
 	},
 	"files": [
 		"src/*",
